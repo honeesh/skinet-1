@@ -6,8 +6,10 @@ using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity {
+namespace Infrastructure.Data 
+{
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity 
+    {
         private readonly StoreContext _context;
         public GenericRepository (StoreContext context) 
         {
