@@ -13,12 +13,6 @@ import { from, of } from 'rxjs';
 })
 export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
-  products: IProduct[] = [];
-  brands: IBrand[] = [];
-  types: IType[] = [];
-  shopParams = new ShopParams();
-  pagination = new Pagination();
-
   constructor(private http: HttpClient) { }
 
   getProducts(shopParams: ShopParams) {
@@ -43,54 +37,22 @@ export class ShopService {
     return this.http.get<IPagination>(this.baseUrl + 'products', { observe: 'response', params })
       .pipe(
         map(response => {
-          this.products = [...this.products, ...response.body.data];
-          this.pagination = response.body;
-          return this.pagination;
+          return response.body;
         })
       );
 
 
   }
-  getShopParams() {
-    return this.shopParams;
-  }
-
-  setShopParams(params: ShopParams) {
-    this.shopParams = params;
-  }
-
   getProduct(id: number) {
-    const product = this.products.find(p => p.id === id);
-
-    if (product) {
-      return of(product);
-    }
-
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {
-    if (this.brands.length > 0) {
-      return of(this.brands);
-    }
-    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands').pipe(
-      map(response => {
-        this.brands = response;
-        return response;
-      })
-    );
+    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
   }
 
   getTypes() {
-    if (this.types.length > 0) {
-      return of(this.types);
-    }
-    return this.http.get<IType[]>(this.baseUrl + 'products/types').pipe(
-      map(response => {
-        this.types = response;
-        return response;
-      })
-    );
+    return this.http.get<IType[]>(this.baseUrl + 'products/types');
   }
 
 }
