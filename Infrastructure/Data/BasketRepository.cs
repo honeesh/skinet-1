@@ -25,7 +25,7 @@ namespace Infrastructure.Data
 
             return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(data);
         }
-
+       
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
            var created = await _database.StringSetAsync(basket.Id,
@@ -35,5 +35,6 @@ namespace Infrastructure.Data
 
             return await GetBasketAsync(basket.Id);
         }
+       
     }
 }
