@@ -42,7 +42,8 @@ namespace API.Controllers {
         {
             return await _userManager.FindByEmailAsync(email) != null;
         }
-         [Authorize]
+
+        [Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
         {

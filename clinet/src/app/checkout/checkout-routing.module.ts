@@ -4,7 +4,7 @@ import { CheckoutComponent } from './checkout.component';
 
 const routes: Routes = [
   {path: '', component: CheckoutComponent}
-]
+];
 
 @NgModule({
   declarations: [],
